@@ -7,9 +7,12 @@ services:
       networks: 
           - "net"
       environment:
-          VIRTUAL_HOST: "YOUR-VIRTUAL-HOST-DOMAIN"
-          LETSENCRYPT_HOST: "YOUR-VIRTUAL-HOST-DOMAIN"
-          VIRTUAL_PORT: "80"
+            HKTV_USERNAME: "YOUR-INPUT"
+            HKTV_PWD: "YOUR-INPUT"
+            HKTV_MERCHANT_CODE: "YOUR-INPUT"
+            VIRTUAL_HOST: "YOUR-DOMAIN"
+            LETSENCRYPT_HOST: "YOUR-DOMAIN"
+            VIRTUAL_PORT: "80"
           
 networks:
     net:

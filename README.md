@@ -39,7 +39,7 @@ Fill in the docker-compose.yml
 
 Then, do the following command:
 ```
-$ sudo docker-compose --env-file .env up 
+$ sudo docker-compose up -d 
 ```
 
 This will copy your environment variable to the container.
