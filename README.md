@@ -4,7 +4,9 @@ This API used to interact with the HKTVmall Exchange backend.
 
 ## Current Features
 
-This API support retrieving n-day
+- This API support retriveing sales of n-day before today
+- This API support retriveing sales of a particular date
+- This API support custom login
 
 ## Preparing Work
 
