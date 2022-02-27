@@ -7,9 +7,6 @@ services:
       networks: 
           - "net"
       environment:
-            HKTV_USERNAME: "YOUR-INPUT"
-            HKTV_PWD: "YOUR-INPUT"
-            HKTV_MERCHANT_CODE: "YOUR-INPUT"
             VIRTUAL_HOST: "YOUR-DOMAIN"
             LETSENCRYPT_HOST: "YOUR-DOMAIN"
             VIRTUAL_PORT: "80"
