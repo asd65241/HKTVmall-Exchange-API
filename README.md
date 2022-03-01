@@ -36,7 +36,7 @@ services:
   hktvmall-api:
       build: .
       image: "hktvmall-exchange-api"
-      container_name: "hktmall-api"
+      container_name: "hktvmall-api"
       restart: "always"
       networks: 
           - "net"
