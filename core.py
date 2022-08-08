@@ -168,6 +168,44 @@ class HKTVmallToolkit:
 
         return parsed["data"]
 
+    @Error_Handler
+    def getAllSalesND(self, date=0):
+        sales_report = []
+
+        for day in range(1,date+1):
+            target_date = self.__getDay(day)
+            print(target_date)
+            sales_report += self.getSales(target_date)
+
+        return sales_report
+
+    @Error_Handler
+    def getAllSales(self, start_date_str=None, end_date_str=None):
+
+        try:
+
+            sales_report = []
+
+            start_date = datetime.datetime.strptime(start_date_str, "%Y%m%d").date()
+            
+            if end_date_str:
+                end_date = datetime.date.today()
+            else:
+                end_date = datetime.datetime.strptime(end_date_str, "%Y%m%d").date()
+
+            delta = end_date - start_date
+            delta = delta.days
+
+            for day in range(1,delta+1):
+                target_date = self.__getDay(day)
+                print(target_date)
+                sales_report += self.getSales(target_date)
+
+            return sales_report
+        except Exception as msg:
+            print(msg)
+
+
 
 if __name__ == '__main__':
     try:

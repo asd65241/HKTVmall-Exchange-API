@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Union
 
 from fastapi import FastAPI, HTTPException
 
@@ -39,6 +39,33 @@ async def get_Sales_with_date_with_login(date: int, q: Query):
         tkit = Toolkit(username=q.username,pwd=q.password,merchant=q.merchant)
 
         results = tkit.getSales(date)
+        return results
+    except Exception as msg:
+        raise HTTPException(status_code=500, detail=repr(msg))
+
+
+@app.post("/sales/nday_all/{nday}")
+async def get_Sales_with_nday_with_login(nday: int, q: Query):
+    """
+    Get all sales from today to nday before today
+    """
+    try:
+        tkit = Toolkit(username=q.username,pwd=q.password,merchant=q.merchant)
+
+        results = tkit.getAllSalesND(nday)
+        return results
+    except Exception as msg:
+        raise HTTPException(status_code=500, detail=repr(msg))
+
+@app.post("/sales/date_all/{start_date}/{end_date}")
+async def get_Sales_with_date_with_login(start_date: str, end_date: str, q: Query):
+    """
+    Get all sales from today to the specific date
+    """
+    try:
+        tkit = Toolkit(username=q.username,pwd=q.password,merchant=q.merchant)
+
+        results = tkit.getAllSales(start_date, end_date)
         return results
     except Exception as msg:
         raise HTTPException(status_code=500, detail=repr(msg))
