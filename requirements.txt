@@ -1,5 +1,6 @@
 anyio==3.5.0
 asgiref==3.5.0
+beautifulsoup4==4.11.1
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
@@ -21,6 +22,7 @@ PyYAML==6.0
 requests==2.27.1
 six==1.16.0
 sniffio==1.2.0
+soupsieve==2.3.2.post1
 starlette==0.17.1
 typing_extensions==4.1.1
 urllib3==1.26.8

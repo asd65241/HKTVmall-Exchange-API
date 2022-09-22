@@ -4,6 +4,8 @@ import datetime
 import json
 import pathlib
 import os
+from bs4 import BeautifulSoup
+from bs2json import bs2json
 
 from decorator import Error_Handler
 
@@ -34,6 +36,7 @@ class HKTVmallToolkit:
         self.merchant = merchant
         self.location = location
         self.maxRetry = maxRetry
+        self.converter = bs2json()
 
         # login to HKTVmall
         for count in range(self.maxRetry):
@@ -68,7 +71,8 @@ class HKTVmallToolkit:
             filePath (str): The location of the report
         """
 
-        fileName = f"ECOM-EXCH_DAILY_ORDER_{self.merchant}_{date}.xlsx"
+        # fileName = f"ECOM-EXCH_DAILY_ORDER_{self.merchant}_{date}.xlsx"
+        fileName = self.__getFileNameGivenDate(date)
         url = "https://exchange.hktvmall.com/merchant/reports/download_report.php"
 
         for _ in range(self.maxRetry):
@@ -131,6 +135,48 @@ class HKTVmallToolkit:
                 return c.value
 
         return Exception("Unable to Login")
+
+    @Error_Handler
+    def __getFileNameGivenDate(self, datestring):
+        """__getFileNameGivenDate
+
+        The method will return the file name of the sales report given the date
+
+        Args:
+            datestring (str): The date string in the format of {yyyymmdd}
+
+        Return:
+            fileName (str): The file name of the sales report
+        """
+
+        # Parse the webpage
+        URL = "https://exchange.hktvmall.com/merchant/reports/daily_order_report.php"
+        r = requests.get(URL,cookies={"PHPSESSID": self.cookies})
+
+        soup = BeautifulSoup(r.content, 'html.parser')
+
+        # Get the html
+        report_options = soup.find_all('form', {"name":"downloadReport"})
+
+        # Convert HTML to JSON
+        report_options = self.converter.convertAll(report_options,join=True)
+
+        # Filename table
+        table = report_options[0]["form"]
+
+        # Get the filename
+        for idx, row in enumerate(table):
+            try:
+                fileName = row["input"]["input"][0]["attributes"]["value"]
+
+                # Check if datestring is in the filename
+                if datestring in fileName:
+                    return fileName
+            except:
+                pass
+        # Cannot find filename
+        return None
+
 
     @Error_Handler
     def getSalesND(self, date=0):
