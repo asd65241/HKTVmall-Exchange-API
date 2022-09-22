@@ -8,7 +8,7 @@ from core import HKTVmallToolkit as Toolkit
 app = FastAPI(
     title="HKTVmall Exchange Sales API",
     description="This API used to interact with the HKTVmall Exchange backend",
-    version="1.2.0",
+    version="1.3.0",
     contact={
         "name": "Tom Mong from Stocksgram",
         "url": "https://stocksgram.com",
