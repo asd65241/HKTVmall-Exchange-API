@@ -1,6 +1,8 @@
 anyio==3.5.0
 asgiref==3.5.0
 beautifulsoup4==4.11.1
+bs2json==0.0.3
+bs4==0.0.1
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
